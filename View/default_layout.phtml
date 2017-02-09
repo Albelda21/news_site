@@ -23,6 +23,7 @@
   </head>
 
   <body>
+  
 
     <nav class="navbar navbar-inverse"> <!--navbar-fixed-top -->
       <div class="container">
@@ -59,13 +60,14 @@
             <li><a href="#">?</a></li>
             <li><a href="#">?</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+          <form class="navbar-form navbar-right" method="get">
+            <input name="search" type="text" class="form-control" placeholder="Search...">
           </form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
     <!--container -->
+    <div class="container"><?php echo isset($_GET['search']) ? $_GET['search'] : null?></div>
     
 
 

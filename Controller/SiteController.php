@@ -15,10 +15,9 @@ class SiteController extends Controller
 	public function indexAction(Request $request)
 	{
 		$repo = $this->container->get('repository_manager')->getRepository('News');
-        // todo: findActive();
-        $politics = $repo->findNumb('5', '1');
-        $sports = $repo->findNumb('5', '2');
-        $sciences = $repo->findNumb('5', '3');
+		$politics = $repo->findNumb('5', '1');
+		$sports = $repo->findNumb('5', '2');
+		$sciences = $repo->findNumb('5', '3');
         
         
         
@@ -54,43 +53,43 @@ class SiteController extends Controller
 	// 	return $this->render('contact.phtml', ['form' => $form]);
 	// }
 
-	public function politicAction()
-	{
-		$repo = $this->container->get('repository_manager')->getRepository('News');
-        // todo: findActive();
-        $politics = $repo->findAllPolitic();
+	// public function politicAction()
+	// {
+	// 	$repo = $this->container->get('repository_manager')->getRepository('News');
+ //        // todo: findActive();
+ //        $politics = $repo->findAllPolitic();
         
         
-        $args = ['politics' => $politics];
+ //        $args = ['politics' => $politics];
 
         
         
-		return $this->render('politic.phtml', $args);
-	}
+	// 	return $this->render('politic.phtml', $args);
+	// }
 
-	public function sportAction()
-	{
-		$repo = $this->container->get('repository_manager')->getRepository('News');
-        // todo: findActive();
-        $sports = $repo->findAllSport();
+	// public function sportAction()
+	// {
+	// 	$repo = $this->container->get('repository_manager')->getRepository('News');
+ //        // todo: findActive();
+ //        $sports = $repo->findAllSport();
         
         
-        $args = ['sports' => $sports];
+ //        $args = ['sports' => $sports];
 
-		return $this->render('sport.phtml', $args);
-	}
+	// 	return $this->render('sport.phtml', $args);
+	// }
 
-	public function scienceAction()
-	{
-		$repo = $this->container->get('repository_manager')->getRepository('News');
-        // todo: findActive();
-        $sciences = $repo->findAllScience();
+	// public function scienceAction()
+	// {
+	// 	$repo = $this->container->get('repository_manager')->getRepository('News');
+ //        // todo: findActive();
+ //        $sciences = $repo->findAllScience();
         
         
-        $args = ['sciences' => $sciences];
+ //        $args = ['sciences' => $sciences];
 
-		return $this->render('science.phtml', $args);
-	}
+	// 	return $this->render('science.phtml', $args);
+	// }
 }
 
 
