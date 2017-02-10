@@ -107,7 +107,7 @@ class News
      */
     public function getCreated()
     {
-        return $this->style;
+        return $this->created;
     }
 
     /**
@@ -116,7 +116,7 @@ class News
      */
     public function setCreated($created)
     {
-        $this->style = $style;
+        $this->created = $created;
         return $this;
     }
 }

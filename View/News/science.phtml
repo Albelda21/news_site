@@ -1,10 +1,14 @@
 <div class="container">
 <h3><a href="/">Back to all news</a></h3>
-<hr style="border: 2px solid black">
+<hr style="border: 1px solid gray">
+
 
 <?php foreach ($sciences as $science) : ?>
 	    <?=$science->getId()?> :
-	    <?=$science->getTitle()?> <br>
+	    <?=$science->getTitle()?><br>
+	     <a class="btn btn-primary btn-xs" href="/index.php?route=news/show&id=<?=$science->getId()?>">Details</a><br><hr>
+
 	    
 	<?php endforeach; ?>
 </div>
+

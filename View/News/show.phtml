@@ -1,0 +1,26 @@
+<div class="container">
+<h1><?=$news->getTitle()?></h1>
+<hr>
+<div class="row">
+    <div class="col-md-3 col-sm-12 col-xs-12">
+        <img class="img-responsive" src="<?=$news->getImage()?>"></img>
+    </div>
+    <div class="col-md-9 col-sm-12 col-sm-12">
+        <h3><?=$news->getTitle()?></h3>
+        <p><?=$news->getBody()?></p>
+			
+				
+			<form>
+				<div class="form-group">
+				<label for="comment">Comment:</label>
+				<textarea class="form-control" rows="3" id="comment"></textarea>
+			</form>
+			<button type="button" class="btn btn-primary btn-sm">Send</button>
+        <hr>
+        <h6 style="font-style: italic;"><?=$news->getCreated()?></h6>
+
+        
+        
+    </div>
+</div>
+</div>

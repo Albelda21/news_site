@@ -6,7 +6,7 @@ namespace Library;
 abstract class Controller 
 {
 
-	private $layout = 'default_layout.phtml';
+	private static $layout = 'default_layout.phtml';
 	protected $container;
 
 	public function setContainer(Container $container)
@@ -14,6 +14,11 @@ abstract class Controller
 		$this->container = $container;
 
 		return $this;
+	}
+
+	public static function setAdminLayout()
+	{
+		self::$layout = 'admin_layout.phtml';
 	}
 
 	protected function render($view, array $args = array())
@@ -29,7 +34,7 @@ abstract class Controller
 		$content = ob_get_clean();
 
 		ob_start();
-		require VIEW_DIR . $this->layout;
+		require VIEW_DIR . self::$layout;
 		return ob_get_clean();
 	}
 
@@ -40,7 +45,7 @@ abstract class Controller
 		$content = ob_get_clean();
 
 		ob_start();
-		require VIEW_DIR . 'error.phtml';
+		require VIEW_DIR . self::$layout;
 		return ob_get_clean();
 	}
 }

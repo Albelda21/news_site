@@ -93,7 +93,7 @@ class NewsRepository extends EntityRepository
 				->setId($row['id'])
 				->setTitle($row['title'])
 				->setBody($row['body'])
-				// ->setPrice($row['price'])
+				->setImage($row['image'])
 				// ->setIsActive($row['is_active'])
 				// ->setStyle($row['style_id'])
 				;
@@ -103,6 +103,32 @@ class NewsRepository extends EntityRepository
 		}
 		return $sciences;
 	}
+
+	 public function count($active = true)
+    {
+        $sql = 'SELECT count(*) FROM news';
+		$sth = $this->pdo->query($sql);
+        return (int)$sth->fetchColumn();
+    }
+
+      public function find($id)
+    {
+        $sth = $this->pdo->prepare('select * from news where id = :id');
+        $sth->execute(compact('id'));
+        $data = $sth->fetch(\PDO::FETCH_ASSOC);
+        
+        if (!$data) {
+            throw new \Exception('not found');
+        }
+        
+        return (new News())
+            ->setId($data['id'])
+            ->setTitle($data['title'])
+            ->setBody($data['body'])
+            ->setImage($data['image'])
+            ->setCreated($data['created']);
+            ;
+    }
 
 
 

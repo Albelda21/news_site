@@ -57,6 +57,9 @@ try {
 	$request = new Request();
 	$route = $request->get('route', 'site/index');
 	$route = explode('/', $route);
+
+
+
 	$controller = 'Controller\\' . ucfirst($route[0]) . 'Controller';
 	$action = $route[1] . 'Action';
 
@@ -66,6 +69,10 @@ try {
 	
 	if (!method_exists($controller, $action)) {
 		throw new \Exception("Page not found", 404);
+	}
+
+	if ($request->get('layout') == 'admin') {
+		Controller::setAdminLayout();
 	}
 
 	$content = $controller->$action($request);

@@ -21,11 +21,14 @@ class SecurityController extends Controller
 
 				$repo = $this->container->get('repository_manager')->getRepository('User');
 				if ($user = $repo->find($email, $password)) {
-					var_dump($user);
-					//Router::redirect('/index.php?route=site/sport');
-				} else {
-					echo 'fail';
-				}
+					//var_dump($user);
+					Session::set('user', $user->getEmail());
+					Session::setFlash('Login success');
+					Router::redirect('/index.php?layout=admin');
+				} 
+				// else {
+				// 	echo 'fail';
+				// }
 			}
 			Session::setFlash('Fill the filds!');
 		}
@@ -36,6 +39,7 @@ class SecurityController extends Controller
 	public function logoutAction(Request $request)
 	{
 		Session::remove('user');
+		Session::setFlash('Logout success');
 		Router::redirect('/');
 	}
 

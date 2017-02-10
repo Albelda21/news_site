@@ -1,12 +1,12 @@
-	<?php 
+<?php 
 
-	namespace Controller;
+namespace Controller;
 
-	use Library\Controller;
-	use Library\Request;
-	use Model\News;
-	use Library\Session;
-	use Library\Router;
+use Library\Controller;
+use Library\Request;
+use Model\News;
+use Library\Session;
+use Library\Router;
 
 	class NewsController extends Controller
 	{
@@ -47,6 +47,15 @@
 
 			return $this->render('science.phtml', $args);
 		}
+
+		public function showAction(Request $request)
+    	{
+	        $repo = $this->container->get('repository_manager')->getRepository('News');
+	        $id = $request->get('id');
+	        $news = $repo->find($id);
+	        
+	        return $this->render('show.phtml', compact('news'));
+    	}
 	}
 
 	 ?>
