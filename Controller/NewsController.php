@@ -7,17 +7,28 @@ use Library\Request;
 use Model\News;
 use Library\Session;
 use Library\Router;
+use Library\Pagination\Pagination;
 
 	class NewsController extends Controller
 	{
-		public function politicAction()
+
+		const BOOKS_PER_PAGE = 5;
+
+		public function politicAction(Request $request)
 		{
 			$repo = $this->container->get('repository_manager')->getRepository('News');
-	        // todo: findActive();
-	        $politics = $repo->findAllPolitic();
+			$page = (int) $request->get('page', 1);
+			$count = $repo->count('1');
+	        $politics = $repo->findNewsByPage($page, self::BOOKS_PER_PAGE, 1);
+
+	        if (!$politics && $count) {
+
+            Router::redirect('/index.php?router=news/politic');
+        }
+
+        $pagination = new Pagination(['itemsCount' => $count, 'itemsPerPage' => self::BOOKS_PER_PAGE, 'currentPage' => $page]);
 	        
-	        
-	        $args = ['politics' => $politics];
+	        $args = ['politics' => $politics, 'pagination' => $pagination];
 
 	        
 	        

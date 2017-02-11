@@ -6,11 +6,14 @@ use Library\Config;
 use Library\Session;
 use Library\Container;
 use Library\RepositoryManager;
+use Library\Router;
+use Library\Route;
 
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', __DIR__ . DS . '..' . DS);
 define('VIEW_DIR', ROOT . 'View' . DS);
 define('LIB_DIR', ROOT . 'Library' . DS);
+define('CONFIG_DIR', ROOT . 'config' . DS);
 
 
 
@@ -44,12 +47,14 @@ try {
 	$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 	$repositoryManager = (new RepositoryManager())->setPDO($pdo);
 
+	$router = new Router(CONFIG_DIR . 'routes.php');// router delete!!!!!!!
+
 	//$router = new Router(CONFIG_DIR . 'routes.php');
 
 	$container = new Container();
 	$container->set('database_connection', $pdo);
 	$container->set('repository_manager', $repositoryManager);
-	//$container->set('router', $router);
+	$container->set('router', $router);//router delete!!!!!
 
    // $router->match($request);
     //$route = $router->getCurrentRoute();
@@ -58,12 +63,15 @@ try {
 	$route = $request->get('route', 'site/index');
 	$route = explode('/', $route);
 
+	$router->match($request);//router delete!!!!!
+    $route = $router->getCurrentRoute();//router delete!!!!!
 
 
-	$controller = 'Controller\\' . ucfirst($route[0]) . 'Controller';
-	$action = $route[1] . 'Action';
 
-	$controller = new $controller(); //BookController();
+	$controller = 'Controller\\' .  $route->controller . 'Controller';// ROUTERucfirst($route[0]) . 'Controller';
+	$action = $route->action . 'Action';
+
+	$controller = new $controller();
 	$controller->setContainer($container);
 
 	
@@ -83,8 +91,3 @@ try {
 
 echo $content;
 
-//require VIEW_DIR . 'layout.phtml';
-
-
-// echo '<hr>';
-// var_dump($controller, $action);

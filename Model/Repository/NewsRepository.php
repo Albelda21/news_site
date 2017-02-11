@@ -47,24 +47,48 @@ class NewsRepository extends EntityRepository
 	// 	return $books;
 
 
-	public function findAllPolitic()
+	public function findNewsByPage($page, $perPage, $type)
 	{
-		$sth = $this->pdo->query('Select * from news where type_id=1');
-		while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
-			$politic = (new News())
-				->setId($row['id'])
-				->setTitle($row['title'])
-				->setBody($row['body'])
-				// ->setPrice($row['price'])
-				// ->setIsActive($row['is_active'])
-				// ->setStyle($row['style_id'])
-				;
-				$politics[] = $politic;
+
+		$offset = ($page - 1) * $perPage;
+		$sql = "SELECT * FROM news WHERE type_id = $type ORDER BY id LIMIT {$offset}, {$perPage}";
+		$sth = $this->pdo->query($sql);
+
+		$news = [];
+
+		 while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
+            
+            $new = (new News())
+                ->setId($row['id'])
+                ->setTitle($row['title'])
+                ->setBody($row['body'])
+                // ->setPrice($row['price'])
+                // ->setIsActive($row['is_active'])
+                // ->setStyle($row['style_id'])
+            ;
+            
+            $news[] = $new;
+        }
+        return $news;
+    }
 
 
-		}
-		return $politics;
-	}
+		// $sth = $this->pdo->query('Select * from news where type_id=1');
+		// while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
+		// 	$politic = (new News())
+		// 		->setId($row['id'])
+		// 		->setTitle($row['title'])
+		// 		->setBody($row['body'])
+		// 		// ->setPrice($row['price'])
+		// 		// ->setIsActive($row['is_active'])
+		// 		// ->setStyle($row['style_id'])
+		// 		;
+		// 		$politics[] = $politic;
+
+
+	// 	}
+	// 	return $politics;
+	// }
 
 	public function findAllScience()
 	{
@@ -104,9 +128,9 @@ class NewsRepository extends EntityRepository
 		return $sciences;
 	}
 
-	 public function count($active = true)
+	 public function count($news_type)
     {
-        $sql = 'SELECT count(*) FROM news';
+        $sql = "SELECT count(*) FROM news WHERE type_id = $news_type";
 		$sth = $this->pdo->query($sql);
         return (int)$sth->fetchColumn();
     }
