@@ -51,7 +51,7 @@ class NewsRepository extends EntityRepository
 	{
 
 		$offset = ($page - 1) * $perPage;
-		$sql = "SELECT * FROM news WHERE type_id = $type ORDER BY id LIMIT {$offset}, {$perPage}";
+		$sql = "SELECT * FROM news WHERE type_id = {$type} ORDER BY id LIMIT {$offset}, {$perPage}";
 		$sth = $this->pdo->query($sql);
 
 		$news = [];
@@ -130,7 +130,7 @@ class NewsRepository extends EntityRepository
 
 	 public function count($news_type)
     {
-        $sql = "SELECT count(*) FROM news WHERE type_id = $news_type";
+        $sql = "SELECT count(*) FROM news WHERE type_id = {$news_type}";
 		$sth = $this->pdo->query($sql);
         return (int)$sth->fetchColumn();
     }

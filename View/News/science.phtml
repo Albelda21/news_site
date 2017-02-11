@@ -6,7 +6,7 @@
 <?php foreach ($sciences as $science) : ?>
 	    <?=$science->getId()?> :
 	    <?=$science->getTitle()?><br>
-	     <a class="btn btn-primary btn-xs" href="/index.php?route=news/show&id=<?=$science->getId()?>">Details</a><br><hr>
+	     <a class="btn btn-primary btn-xs" href="/science-<?=$science->getId()?>.html">Details</a><br><hr>
 
 	    
 	<?php endforeach; ?>

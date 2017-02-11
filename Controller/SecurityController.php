@@ -24,7 +24,7 @@ class SecurityController extends Controller
 					//var_dump($user);
 					Session::set('user', $user->getEmail());
 					Session::setFlash('Login success');
-					Router::redirect('/index.php?layout=admin');
+					$this->container->get('router')->redirect('/admin');
 				} 
 				// else {
 				// 	echo 'fail';
