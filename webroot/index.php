@@ -29,14 +29,11 @@ spl_autoload_register(function ($className) {
 
 try {
 	
-	// echo new Library\Password('admin');
-	// echo '<br>';
-	// echo new Library\Password('manager');
 
 
 	Session::start();
 
-	//move conf to separate file
+	
 	Config::set('db_user', 'root');
 	Config::set('db_pass', '');
 	Config::set('db_name', 'news_site');
@@ -47,28 +44,27 @@ try {
 	$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 	$repositoryManager = (new RepositoryManager())->setPDO($pdo);
 
-	$router = new Router(CONFIG_DIR . 'routes.php');// router delete!!!!!!!
+	$router = new Router(CONFIG_DIR . 'routes.php');
 
-	//$router = new Router(CONFIG_DIR . 'routes.php');
+	
 
 	$container = new Container();
 	$container->set('database_connection', $pdo);
 	$container->set('repository_manager', $repositoryManager);
-	$container->set('router', $router);//router delete!!!!!
+	$container->set('router', $router);
 
-   // $router->match($request);
-    //$route = $router->getCurrentRoute();
+
 
 	$request = new Request();
 	$route = $request->get('route', 'site/index');
 	$route = explode('/', $route);
 
-	$router->match($request);//router delete!!!!!
-    $route = $router->getCurrentRoute();//router delete!!!!!
+	$router->match($request);
+    $route = $router->getCurrentRoute();
 
 
 
-	$controller = 'Controller\\' .  $route->controller . 'Controller';// ROUTERucfirst($route[0]) . 'Controller';
+	$controller = 'Controller\\' .  $route->controller . 'Controller';
 	$action = $route->action . 'Action';
 
 	$controller = new $controller();

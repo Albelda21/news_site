@@ -57,7 +57,7 @@ class News
     }
 
     /**
-     * @param mixed $description
+     * 
      * @return $this
      */
     public function setBody($body)
@@ -71,16 +71,16 @@ class News
      */
     public function getTypeId()
     {
-        return $this->price;
+        return $this->type_id;
     }
 
     /**
-     * @param mixed $price
+     * 
      * @return $this
      */
     public function setTypeId($typeId)
     {
-        $this->type = $typeId;
+        $this->type_id = $typeId;
         return $this;
     }
 
@@ -93,7 +93,7 @@ class News
     }
 
     /**
-     * @param mixed $isActive
+     * 
      * @return $this
      */
     public function setImage($image)
@@ -111,7 +111,7 @@ class News
     }
 
     /**
-     * @param mixed $style
+     *
      * @return $this
      */
     public function setCreated($created)

@@ -23,7 +23,7 @@ use Library\Pagination\Pagination;
 
 	        if (!$politics && $count) {
 
-            Router::redirect('/index.php?router=news/politic');
+             $this->container->get('router')->redirect('/politic');
         }
 
         $pagination = new Pagination(['itemsCount' => $count, 'itemsPerPage' => self::BOOKS_PER_PAGE, 'currentPage' => $page]);
@@ -35,26 +35,45 @@ use Library\Pagination\Pagination;
 			return $this->render('politic.phtml', $args);
 		}
 
-		public function sportAction()
+		public function sportAction(Request $request)
 		{
 			$repo = $this->container->get('repository_manager')->getRepository('News');
-	        // todo: findActive();
-	        $sports = $repo->findAllSport();
+			$page = (int) $request->get('page', 1);
+			$count = $repo->count('1');
+	        
+	        $sports = $repo->findNewsByPage($page, self::BOOKS_PER_PAGE, 2);
+
+	         if (!$sports && $count) {
+
+             $this->container->get('router')->redirect('/sport');
+        }
+
+        $pagination = new Pagination(['itemsCount' => $count, 'itemsPerPage' => self::BOOKS_PER_PAGE, 'currentPage' => $page]);
 	        
 	        
-	        $args = ['sports' => $sports];
+	        $args = ['sports' => $sports, 'pagination' => $pagination];
 
 			return $this->render('sport.phtml', $args);
 		}
 
-		public function scienceAction()
+		public function scienceAction(Request $request)
 		{
 			$repo = $this->container->get('repository_manager')->getRepository('News');
-	        // todo: findActive();
-	        $sciences = $repo->findAllScience();
+			$page = (int) $request->get('page', 1);
+			$count = $repo->count('1');
+	        
+	        $sciences = $repo->findNewsByPage($page, self::BOOKS_PER_PAGE, 3);
+
+	        if (!$sciences && $count) {
+
+             $this->container->get('router')->redirect('/science');
+        }
+
+             $pagination = new Pagination(['itemsCount' => $count, 'itemsPerPage' => self::BOOKS_PER_PAGE, 'currentPage' => $page]);
+
 	        
 	        
-	        $args = ['sciences' => $sciences];
+	        $args = ['sciences' => $sciences, 'pagination' => $pagination];
 
 			return $this->render('science.phtml', $args);
 		}

@@ -4,6 +4,7 @@ namespace Controller\Admin;
 use Library\Controller;
 use Library\Request;
 use Library\Session;
+use Model\Form\NewsFrom;
 
 class NewsController extends Controller
 {
@@ -13,11 +14,11 @@ class NewsController extends Controller
             $this->container->get('router')->redirect('/login');
         }
         
-        $repo = $this->container->get('repository_manager')->getRepository('Book');
-        // todo: findActive();
-        $books = $repo->findAll();
+        $repo = $this->container->get('repository_manager')->getRepository('News');
         
-        $args = ['books' => $books];
+        $news = $repo->findAll();
+        
+        $args = ['news' => $news];
         
         return $this->render('index.phtml', $args);
     }
@@ -29,10 +30,10 @@ class NewsController extends Controller
         }
         
         $id = $request->get('id');
-        $book = $this
+        $new = $this
             ->container
             ->get('repository_manager')
-            ->getRepository('Book')
+            ->getRepository('News')
             ->find($id);
             
         // $form = new BookForm($request); // todo
@@ -41,6 +42,15 @@ class NewsController extends Controller
         //         // save($book)
         //     }
         // }
+
+            $form = new NewsForm($request); // todo
+        if ($request->isPost()) {
+            if ($form->isValid()) {
+                // save($news)
+            }
+        }
+
+
     }
     
     public function newAction(Request $request)
@@ -54,7 +64,7 @@ class NewsController extends Controller
         // $this
         //     ->container
         //     ->get('repository_manager')
-        //     ->getRepository('Book')
+        //     ->getRepository('News')
         //     ->removeById($id); 
     }
 }

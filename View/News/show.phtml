@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-top: 80px">
 <h1><?=$news->getTitle()?></h1>
 <hr>
 <div class="row">
@@ -10,17 +10,19 @@
         <p><?=$news->getBody()?></p>
 			
 				
-			<form>
+			<form method="get" action="#">
 				<div class="form-group">
 				<label for="comment">Comment:</label>
-				<textarea class="form-control" rows="3" id="comment"></textarea>
+				<textarea class="form-control" rows="3" name="form" id="comment"></textarea>
 			</form>
 			<button type="button" class="btn btn-primary btn-sm">Send</button>
         <hr>
         <h6 style="font-style: italic;"><?=$news->getCreated()?></h6>
 
-        
+
         
     </div>
 </div>
 </div>
+
+

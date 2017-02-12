@@ -23,7 +23,7 @@ abstract class Controller
 
 	protected function render($view, array $args = array())
 	{
-		extract($args); // ['form' => $form] ==> $form = form!
+		extract($args); // ['form' => $form] == {$form = form} !
 		$classname = str_replace (['Controller', '\\'],'', get_class($this));
 		$file = VIEW_DIR . $classname . DS . $view;
 		if (!file_exists($file)) {

@@ -21,18 +21,16 @@ class SecurityController extends Controller
 
 				$repo = $this->container->get('repository_manager')->getRepository('User');
 				if ($user = $repo->find($email, $password)) {
-					//var_dump($user);
+					
 					Session::set('user', $user->getEmail());
 					Session::setFlash('Login success');
 					$this->container->get('router')->redirect('/admin');
 				} 
-				// else {
-				// 	echo 'fail';
-				// }
+				
 			}
 			Session::setFlash('Fill the filds!');
 		}
-		//$repo = $this->container->get('repository_manager')->getRepository('User');
+		$repo = $this->container->get('repository_manager')->getRepository('User');
 		return $this->render('login.phtml', ['form' => $form]);
 	}
 

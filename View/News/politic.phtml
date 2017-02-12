@@ -1,17 +1,23 @@
-<div class="container">
+<div class="container" style="margin-top: 80px">
 <h3><a href="/">Back to all news</a></h3>
 <hr style="border: 1px solid gray">
 
 
+
+<div class="row">
 <?php foreach ($politics as $politic) : ?>
+  <div class="col-md-4">
 		<?=$politic->getId()?> :
-	    <?=$politic->getTitle()?><br>
+	    <?=$politic->getTitle()?><br><hr>
+      <img src="<?=$politic->getImage()?>"><br><br>
+
 	    <a class="btn btn-primary btn-xs" href="/politic-<?=$politic->getId()?>.html">Details</a><hr>
-	     
+  </div> 
 	<?php endforeach; ?>
 
 </div>
 
+<div class="container" style="text-align: center;">
 <nav aria-label="Page navigation">
   <ul class="pagination">
     <?php foreach ($pagination->buttons as $button) :
@@ -23,3 +29,4 @@
       
   </ul>
 </nav>
+</div>

@@ -13,16 +13,16 @@ class BookRepository extends EntityRepository
 	{
 		 //$style = (new Style());
 		// $pdo = DbConnection::getInstance()->getPdo();
-		$sth = $this->pdo->query('Select book.id as book_id, style.name as style_name from book join style on book.style_id=style.id ORDER BY `book`.`id` ASC');
+		$sth = $this->pdo->query('Select * from news');
 		while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
-			$book = (new Book())
-				->setId($row['book_id'])
-				->setImage($row['title'])
+			$book = (new News())
+				->setId($row['id'])
+				->setTitle($row['title'])
 				// ->setDescription($row['description'])
 				// ->setPrice($row['price'])
 				// ->setIsActive($row['is_active'])
 				// ->setStyle($row['style_id'])
-				->setStyle((new Style)->setName($row['style_name']))
+				//->setStyle((new Style)->setName($row['style_name']))
 
 				;
 				$books[] = $book;

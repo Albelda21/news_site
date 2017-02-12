@@ -21,5 +21,5 @@ return  array(
     // admin routes
     'admin_default' => new Route('/admin', 'Admin\\Default', 'index'),
     'admin_news' => new Route('/admin/news', 'Admin\\News', 'index'),
-    'admin_book_edit' => new Route('/admin/books/edit/{id}', 'Admin\\Book', 'edit', array('id' => '[0-9]+')),
+    'admin_news_edit' => new Route('/admin/news/edit/{id}', 'Admin\\News', 'edit', array('id' => '[0-9]+')),
 );

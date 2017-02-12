@@ -26,70 +26,17 @@ class SiteController extends Controller
 		return $this->render('index.phtml', $args);	
 	}
 
-	// public function contactAction(Request $request)
-	// {
-	// 	$form = new ContactForm($request); //object Contact form
-	// 	$repo = $this->container->get('repository_manager')->getRepository('Feedback'); // => instance FeedbackRepository;
+	public function searchAction(Request $request)
+	{
+		$repo = $this->container->get('repository_manager')->getRepository('News');
+		$search = $repo->findTitle();
+		$getSearch = $request->get('search');
+		
+		$args = ['search' => $search, 'getSearch' => $getSearch];
 
+		return $this->render('search.phtml', $args);
+	}
 
-	// 	if ($request->isPost()) {
-	// 		if ($form->isValid()) {
-	// 			$feedback = (new Feedback()) //return this in setters to set 1 by 1
-	// 				->setName($form->username)
-	// 				->setEmail($form->email)
-	// 				->setMessage($form->message)
-	// 				->setIpAddress($request->getIpAddress())
-	// 			;
-
-	// 			$repo->save($feedback);
-	// 			Session::setFlash('Feedback saved');
-	// 			Router::redirect('/index.php?route=site/contact');
-
-	// 		}
-
-	// 		Session::setFlash('Fill the filds');			
-
-	// 	}
-	// 	return $this->render('contact.phtml', ['form' => $form]);
-	// }
-
-	// public function politicAction()
-	// {
-	// 	$repo = $this->container->get('repository_manager')->getRepository('News');
- //        // todo: findActive();
- //        $politics = $repo->findAllPolitic();
-        
-        
- //        $args = ['politics' => $politics];
-
-        
-        
-	// 	return $this->render('politic.phtml', $args);
-	// }
-
-	// public function sportAction()
-	// {
-	// 	$repo = $this->container->get('repository_manager')->getRepository('News');
- //        // todo: findActive();
- //        $sports = $repo->findAllSport();
-        
-        
- //        $args = ['sports' => $sports];
-
-	// 	return $this->render('sport.phtml', $args);
-	// }
-
-	// public function scienceAction()
-	// {
-	// 	$repo = $this->container->get('repository_manager')->getRepository('News');
- //        // todo: findActive();
- //        $sciences = $repo->findAllScience();
-        
-        
- //        $args = ['sciences' => $sciences];
-
-	// 	return $this->render('science.phtml', $args);
-	// }
 }
 
 

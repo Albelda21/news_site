@@ -8,11 +8,11 @@ class Container
 
 	public function get($key) //получить по ключу, который мы введем
 	{
-		return isset($this->services[$key]) ? $this->services[$key] : null;
-		// if (!isset($this->services[$key])) {
-		// 	throw new \Exception("Error Processing Request", 1);
-		// 	}
-		// 	return $this->services[$key];
+		//return isset($this->services[$key]) ? $this->services[$key] : null;
+		if (!isset($this->services[$key])) {
+			throw new \Exception("Error Class Container", 666);
+			}
+			return $this->services[$key];
 	}
 
 	public function set($key, $object)

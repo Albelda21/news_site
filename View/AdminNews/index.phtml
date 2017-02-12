@@ -1,0 +1,21 @@
+<table width='100%'>
+    <tr>
+        <th>Title</th>
+        <th>ID</th>
+        <th>Actions</th>
+    </tr>
+    <?php foreach ($news as $new) : ?>
+    <tr>
+        <td>
+            <?=$new->getTitle();?>
+        </td>
+        <td>
+            <?=$new->getId();?>
+        </td>
+        <td>
+            <a class="btn btn-default" href="/admin/news/edit/<?=$new->getId()?>">Edit</a>
+            <a class="btn btn-default" href="#">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

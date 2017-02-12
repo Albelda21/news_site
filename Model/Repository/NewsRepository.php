@@ -17,9 +17,8 @@ class NewsRepository extends EntityRepository
 				->setId($row['id'])
 				->setTitle($row['title'])
 				->setBody($row['body'])
-				// ->setPrice($row['price'])
-				// ->setIsActive($row['is_active'])
-				// ->setStyle($row['style_id'])
+				->setTypeId($row['type_id'])
+                ->setImage($row['image'])
 				;
 				$sports[] = $sport;
 
@@ -27,24 +26,6 @@ class NewsRepository extends EntityRepository
 		}
 		return $sports;
 	}
-
-	// public function findActive()
-	// {
-	// 	$pdo = DbConnection::getInstance()->getPdo();
-	// 	$sth = $pdo->query('select * from book where is_active=1');
-	// 	while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
-	// 		$book = (new Book())
-	// 			->setId($row['id'])
-	// 			->setTitle($row['title'])
-	// 			->setDescription($row['description'])
-	// 			->setPrice($row['price'])
-	// 			->setIsActive($row['is_active'])
-	// 			->setStyle($row['style_id'])
-	// 			;
-	// 			$books[] = $book;
-
-	// 	}
-	// 	return $books;
 
 
 	public function findNewsByPage($page, $perPage, $type)
@@ -62,33 +43,14 @@ class NewsRepository extends EntityRepository
                 ->setId($row['id'])
                 ->setTitle($row['title'])
                 ->setBody($row['body'])
-                // ->setPrice($row['price'])
-                // ->setIsActive($row['is_active'])
-                // ->setStyle($row['style_id'])
-            ;
+                ->setTypeId($row['type_id'])
+                ->setImage($row['image'])
+               ;
             
             $news[] = $new;
         }
         return $news;
     }
-
-
-		// $sth = $this->pdo->query('Select * from news where type_id=1');
-		// while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
-		// 	$politic = (new News())
-		// 		->setId($row['id'])
-		// 		->setTitle($row['title'])
-		// 		->setBody($row['body'])
-		// 		// ->setPrice($row['price'])
-		// 		// ->setIsActive($row['is_active'])
-		// 		// ->setStyle($row['style_id'])
-		// 		;
-		// 		$politics[] = $politic;
-
-
-	// 	}
-	// 	return $politics;
-	// }
 
 	public function findAllScience()
 	{
@@ -98,9 +60,8 @@ class NewsRepository extends EntityRepository
 				->setId($row['id'])
 				->setTitle($row['title'])
 				->setBody($row['body'])
-				// ->setPrice($row['price'])
-				// ->setIsActive($row['is_active'])
-				// ->setStyle($row['style_id'])
+				->setTypeId($row['type_id'])
+				->setImage($row['image'])
 				;
 				$sciences[] = $science;
 
@@ -117,14 +78,15 @@ class NewsRepository extends EntityRepository
 				->setId($row['id'])
 				->setTitle($row['title'])
 				->setBody($row['body'])
+				->setTypeId($row['type_id'])
 				->setImage($row['image'])
-				// ->setIsActive($row['is_active'])
-				// ->setStyle($row['style_id'])
 				;
+
 				$sciences[] = $science;
 
 
 		}
+
 		return $sciences;
 	}
 
@@ -150,10 +112,50 @@ class NewsRepository extends EntityRepository
             ->setTitle($data['title'])
             ->setBody($data['body'])
             ->setImage($data['image'])
-            ->setCreated($data['created']);
+            ->setTypeId($data['type_id'])
+            
             ;
     }
 
+
+
+public function findAll()
+	{
+		 //$style = (new Style());
+		
+		$sth = $this->pdo->query('Select * from news');
+		while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
+			$book = (new News())
+				->setId($row['id'])
+				->setTitle($row['title'])
+				->setBody($row['body'])
+				->setTypeId($row['type_id']) // new Type class
+				->setImage($row['image'])
+				
+				//->setStyle((new Style)->setName($row['style_name']))
+
+				;
+				$books[] = $book;
+
+
+		}
+		return $books;
+	}
+
+	public function findTitle()
+	{
+		 
+		
+		$sth = $this->pdo->query('Select title from news');
+		while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
+			$new = (new News())
+					;
+				$newss[] = $news;
+
+
+		}
+		return $news;
+	}
 
 
 
