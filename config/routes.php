@@ -15,6 +15,7 @@ return  array(
     'contact_us' => new Route('/contact-us', 'Site', 'contact'),
     'login' => new Route('/login', 'Security', 'login'),
     'logout' => new Route('/logout', 'Security', 'logout'),
+    'register' => new Route('/register', 'Security', 'register'),
     'cart_list' => new Route('/cart', 'Cart', 'showList'),
     'cart_add' => new Route('/cart/add/{id}', 'Cart', 'add', array('id' => '[0-9]+')),
     

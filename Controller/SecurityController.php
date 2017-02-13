@@ -6,6 +6,7 @@ use Library\Controller;
 use Library\Request;
 use Library\Password;
 use Model\Form\LoginForm;
+use Model\Form\RegisterForm;
 use Library\Session;
 use Library\Router;
 
@@ -30,7 +31,7 @@ class SecurityController extends Controller
 			}
 			Session::setFlash('Fill the filds!');
 		}
-		$repo = $this->container->get('repository_manager')->getRepository('User');
+		//$repo = $this->container->get('repository_manager')->getRepository('User');
 		return $this->render('login.phtml', ['form' => $form]);
 	}
 
@@ -41,9 +42,24 @@ class SecurityController extends Controller
 		Router::redirect('/');
 	}
 
-	public function regisrtAction(Request $request)
+	public function registerAction(Request $request)
 	{
+		$form = new RegisterForm($request);
+		
+		if ($request->isPost()) {
+			if($form->isValid()) {
+				$password = new Password($form->password);
+				$email = $form->email;
+				$repo = $this->container->get('repository_manager')->getRepository('User');
+				
+			}
+		}
 
+
+
+
+
+		return $this->render('register.phtml', ['form' => $form]);
 	}
 }
 
